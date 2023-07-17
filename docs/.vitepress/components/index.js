@@ -5,16 +5,13 @@ const components = [
   HbCheckbox,
 ]
 
-const HabitUi = () => {
+const install = (app, options = {}) => {
+  console.log(HbCheckbox.styles) // ["/* inlined css */"]
   components.map(component => {
-    console.log(HbCheckbox.styles) // ["/* inlined css */"]
     customElements.define(component.name, component);
-  })  
-}
-export default defineNuxtPlugin((nuxtApp) => {
-  return {
-    provide: {
-      habitUi,
-    },
-  };
-});
+  }) 
+};
+
+export { install };
+
+export default install;
