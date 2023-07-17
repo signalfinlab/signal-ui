@@ -4,6 +4,7 @@
   "workspaces": [
     "docs/.vitepress/*"
   ],
+  "main": "docs/.vitepress/components/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/signalfinlab/signal-ui"
