@@ -1,15 +1,20 @@
 import { defineCustomElement } from 'vue'
-import Checkbox from './hb-checkbox/index.vue';
+import HbCheckbox from './hb-checkbox/index.vue';
 
 const components = [
-  Checkbox,
+  HbCheckbox,
 ]
 
-console.log(Checkbox.styles) // ["/* inlined css */"]
-
-components.map(component => {
-  // convert into custom element constructor
-  const HbCheckbox = defineCustomElement(Checkbox)
-  // register
-  customElements.define('hb-checkbox', HbCheckbox)
-})
+const HabitUi = () => {
+  components.map(component => {
+    console.log(HbCheckbox.styles) // ["/* inlined css */"]
+    customElements.define(component.name, component);
+  })  
+}
+export default defineNuxtPlugin((nuxtApp) => {
+  return {
+    provide: {
+      habitUi,
+    },
+  };
+});
