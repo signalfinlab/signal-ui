@@ -1,0 +1,328 @@
+@import '@styles/__variables.scss';
+
+/* https://webdesign.tutsplus.com/tutorials/how-to-make-custom-accessible-checkboxes-and-radio-buttons--cms-32074 */
+/* https://codepen.io/dylanraga/pen/Qwqbab */
+
+// ============================================================
+// 브라우저 기본스타일 초기화
+// ============================================================
+
+// 브라우저 기본 체크박스를 '시각적으로' 숨김
+input.hb-checkbox__input {
+  position: absolute;
+  top: 0;
+  width: 1.25em;
+  height: 1.25em;
+  left: 0;
+  opacity: 0.001;
+
+  box-sizing: border-box;
+  margin: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+// ============================================================
+// 레이아웃 설정
+// ============================================================
+.hb-checkbox {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  /* background-color: rgba(0, 255, 0, 0.05); */
+
+  /* 여기 설정된 사이즈가 em이 되며 체크박스 및 꺾쇠의 크기를 결정합니다 */
+  /* PROP : Size (크기) 섹션에서 이 값을 변경합니다 */
+  font-size: 14px;
+
+  &__label {
+    display: flex;
+    gap: 0.57em; /* 8px*/
+
+    width: fit-content;
+    cursor: pointer;
+  }
+
+  &__mark {
+    height: 1.25em; /* 17.5 px; */
+    width: 1.25em; /* 17.5 px; */
+    flex-grow: 0;
+    flex-shrink: 0;
+    background: #aaa;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  &__text {
+    /* background-color: rgba(0, 255, 0, 0.05); */
+    line-height: 1.25em;
+  }
+}
+
+// 체크모양의 사이즈. pseudo 로 그린 본 컴포의 체크모양의 박스사이징이 환경에 따라 border-box로 변경되지 않도록 미리 정의합니다
+.hb-checkbox__mark {
+  &:before,
+  &:after {
+    box-sizing: content-box !important;
+  }
+}
+
+// ============================================================
+// PROP : Shape (형태)
+// ============================================================
+
+// ------------------------------
+// 기본값이거나 박스일 때
+// ------------------------------
+.hb-checkbox,
+.hb-checkbox--box {
+  // 마크 회색 테두리 그리기
+  .hb-checkbox__mark {
+    border-radius: 3px;
+    background-color: white;
+    border: 2px solid $neutral400;
+  }
+
+  // 라벨 타이포 설정하기
+  .hb-checkbox__label {
+    font-weight: bold;
+    color: rgba($neutral800, 0.85);
+  }
+
+  // 체크상태에서 박스에 바탕색 출력
+  .hb-checkbox__input:checked + .hb-checkbox__label .hb-checkbox__mark {
+    background-color: $indigo500;
+    border: none;
+  }
+
+  // 체크상태에서 체크모양 출력
+  .hb-checkbox__input:checked + .hb-checkbox__label .hb-checkbox__mark:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0.45em;
+    left: 0.2em;
+    border-right: 0.2em solid transparent;
+    border-bottom: 0.2em solid transparent;
+    transform-origin: 0% 100%;
+    width: 0.3em;
+    height: 0.6em;
+    border-color: #ffffff;
+    transform: translate3d(0, -0.62em, 0) rotate(45deg);
+  }
+
+  // 체크상태에서 타이포 진하게 하기
+  .hb-checkbox__input:checked ~ .hb-checkbox__label {
+    color: $neutral800;
+  }
+}
+
+// ------------------------------
+// 라인일 때
+// ------------------------------
+.hb-checkbox--line {
+  // 라벨 타이포 설정하기
+  .hb-checkbox__label {
+    font-weight: normal;
+    color: $neutral700;
+  }
+
+  // 마크에 테두리 및 바탕색 넣지 않기
+  .hb-checkbox__input ~ .hb-checkbox__label .hb-checkbox__mark {
+    background-color: transparent;
+    border: none;
+  }
+
+  // 체크상태에서 마크에 테두리 및 바탕색 넣지 않기
+  .hb-checkbox__input:checked ~ .hb-checkbox__label .hb-checkbox__mark {
+    background-color: transparent;
+    border: none;
+  }
+
+  // 기본 체크모양 그려두기
+  .hb-checkbox__mark:before {
+    content: '';
+    display: block;
+    position: absolute;
+
+    top: 0.3em;
+    left: 0.11em;
+    width: 0.37em;
+    height: 0.73em;
+    border-right: 0.218em solid rgba($neutral400, 0.8);
+    border-bottom: 0.218em solid rgba($neutral400, 0.8);
+    transform: translate3d(0, -0.62em, 0) rotate(45deg);
+    transform-origin: 0% 100%;
+  }
+
+  // 체크상태에서 체크모양에 색칠하기
+  .hb-checkbox__input:checked ~ .hb-checkbox__label .hb-checkbox__mark:before {
+    top: 0.3em;
+    left: 0.11em;
+    width: 0.37em;
+    height: 0.73em;
+    border-right: 0.218em solid $indigo500;
+    border-bottom: 0.218em solid $indigo500;
+  }
+
+  // 체크상태에서 타이포 진하게 하기
+  .hb-checkbox__input:checked ~ .hb-checkbox__label {
+    color: $neutral800;
+  }
+}
+
+// ============================================================
+// PROP : Size (크기)
+// ============================================================
+
+.hb-checkbox {
+  /* 여기 설정된 사이즈가 em이 되며 체크박스 및 꺾쇠의 크기를 결정합니다 */
+
+  // h2
+  &--h2 {
+    font-size: 18px;
+  }
+
+  // h3
+  &--h3 {
+    font-size: 16px;
+  }
+
+  // h4 : 기본값이므로 중복 작성하지 않음
+}
+
+// ============================================================
+// PROP : Bracket (꺾쇠)
+// ============================================================
+.hb-checkbox__bracket {
+  margin-left: auto;
+
+  color: $neutral400;
+  width: 40px;
+  flex-shrink: 0;
+  height: 1.25em;
+  line-height: 1.25em;
+  text-align: center;
+
+  /* 시각적 정렬을 위해 위치를 오른쪽으로 약간 이동시킵니다 */
+  position: relative;
+  right: -12px;
+}
+
+// ============================================================
+// PROP : Animation
+// ============================================================
+
+// ------------------------------
+// 기본값이거나 박스일 때
+// ------------------------------
+
+.hb-checkbox--animation {
+  // 마크를 색칠하기
+  .hb-checkbox__input:checked ~ .hb-checkbox__label .hb-checkbox__mark {
+    background-color: $indigo500;
+    border: none;
+    animation: shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
+    @keyframes shrink-bounce {
+      0% {
+        transform: scale(1);
+      }
+      33% {
+        transform: scale(0.85);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
+
+  // 체크 그리기
+  .hb-checkbox__input:checked ~ .hb-checkbox__label .hb-checkbox__mark:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0.45em;
+    left: 0.2em;
+    border-right: 0.2em solid transparent;
+    border-bottom: 0.2em solid transparent;
+    transform: rotate(45deg);
+    transform-origin: 0% 100%;
+
+    animation: checkbox-check 187.5ms 375ms cubic-bezier(0.4, 0, 0.23, 1) forwards;
+
+    @keyframes checkbox-check {
+      0% {
+        width: 0;
+        height: 0;
+        border-color: #ffffff;
+        transform: translate3d(0, 0, 0) rotate(45deg);
+      }
+      33% {
+        width: 0.3em;
+        height: 0;
+        transform: translate3d(0, 0, 0) rotate(45deg);
+      }
+      100% {
+        width: 0.3em;
+        height: 0.6em;
+        border-color: #ffffff;
+        transform: translate3d(0, -0.62em, 0) rotate(45deg);
+      }
+    }
+  }
+}
+
+// ------------------------------
+// 라인일 때
+// ------------------------------
+
+.hb-checkbox--animation.hb-checkbox--line {
+  // 마크에 테 그리지 않기
+  .hb-checkbox__input ~ .hb-checkbox__label .hb-checkbox__mark {
+    background-color: transparent;
+    border: none;
+  }
+
+  // 체크상태에서 마크에 색칠 안하기
+  .hb-checkbox__input:checked ~ .hb-checkbox__label .hb-checkbox__mark {
+    animation: none;
+  }
+
+  // 체크상태에서 체크모양에 색칠하기
+  .hb-checkbox__input:checked ~ .hb-checkbox__label .hb-checkbox__mark:before {
+    content: '';
+    display: block;
+    position: absolute;
+
+    top: 0.3em;
+    left: 0.11em;
+    width: 0.37em;
+    height: 0.73em;
+    border-right: 0.218em solid rgba($neutral400, 0.8);
+    border-bottom: 0.218em solid rgba($neutral400, 0.8);
+    transform: translate3d(0, -0.62em, 0) rotate(45deg);
+    transform-origin: 0% 100%;
+
+    animation: checkbox-check-ver-shape-line 187.5ms 375ms cubic-bezier(0.4, 0, 0.23, 1) forwards;
+
+    @keyframes checkbox-check-ver-shape-line {
+      0% {
+        width: 0;
+        height: 0;
+        border-color: $indigo500;
+        transform: translate3d(0em, 0.11em, 0) rotate(45deg);
+      }
+      33% {
+        width: 0.37em;
+        height: 0;
+        transform: translate3d(0em, 0.11em, 0) rotate(45deg);
+      }
+      100% {
+        width: 0.37em;
+        height: 0.73em;
+        border-color: $indigo500;
+        transform: translate3d(0, -0.62em, 0) rotate(45deg);
+      }
+    }
+  }
+}

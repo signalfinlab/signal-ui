@@ -1,0 +1,219 @@
+$module: 'hb-button';
+@import '@styles/__variables.scss';
+
+// ============================================================
+// 브라우저 기본스타일 초기화
+// ============================================================
+button {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+// ============================================================
+// 구조
+// ============================================================
+
+.#{$module} {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  &:hover,
+  &:active {
+    transition: 0.07s;
+  }
+}
+
+// ============================================================
+// PROP : Color (색상)
+// ============================================================
+.#{$module} {
+  // 기본값이 없으면 --primary와 동일
+  background-color: $color-primary;
+  color: white;
+
+  &--primary {
+    background-color: $color-primary;
+    color: white;
+    &:hover {
+      background-color: $indigo600;
+    }
+    &:active {
+      background-color: $indigo800;
+    }
+  }
+  &--kakao {
+    background-color: $color-kakao;
+    color: black;
+    &:hover {
+      background-color: $yellow300;
+    }
+    &:active {
+      background-color: $yellow400;
+    }
+  }
+  &--lightblue {
+    background-color: $indigo50;
+    color: $indigo500;
+    &:hover {
+      background-color: rgba($indigo100, 0.75);
+    }
+    &:active {
+      background-color: $indigo100;
+    }
+  }
+  &--lightgray {
+    background-color: $neutral100;
+    color: $neutral700;
+    &:hover {
+      background-color: $neutral200;
+    }
+    &:active {
+      background-color: $neutral300;
+    }
+  }
+}
+
+// ============================================================
+// PROP : Shape (형태)
+// ============================================================
+.#{$module}--line {
+  background-color: white;
+  border: 1px solid;
+
+  // 색상은 기본값이 없으면 --primary와 동일
+  border-color: $color-primary;
+  color: $color-primary;
+
+  &.#{$module}--primary {
+    border-color: $color-primary;
+    color: $color-primary;
+    &:hover {
+      border-color: $indigo600;
+      background-color: rgba($indigo50, 0.5);
+    }
+    &:active {
+      border-color: $indigo800;
+      background-color: $indigo50;
+    }
+  }
+  &.#{$module}--gray {
+    border-color: $neutral400;
+    color: $neutral500;
+    &:hover {
+      border-color: $neutral500;
+      background-color: rgba($neutral50, 0.5);
+    }
+    &:active {
+      border-color: $neutral500;
+      background-color: $neutral50;
+    }
+  }
+}
+
+.#{$module}--text {
+  background-color: transparent;
+  border: 0;
+  color: $color-primary;
+  &:hover {
+    background-color: rgba($indigo50, 0.5);
+  }
+  &:active {
+    background-color: $indigo50;
+  }
+}
+
+// ============================================================
+// DISABLED : 비활성화 여부
+// ============================================================
+.#{$module} {
+  &:disabled {
+    background-color: #ced4da !important;
+    color: #adb5bd !important;
+    border: none !important;
+  }
+  &--line:disabled {
+    background-color: #f1f3f5 !important;
+    border: 1px solid #ced4da !important;
+    color: #ced4da !important;
+  }
+  &--text:disabled {
+    background-color: transparent !important;
+    color: #ced4da !important;
+  }
+}
+
+// ============================================================
+// PROP : Height (높이)
+// ============================================================
+.#{$module} {
+  &--xs {
+    height: 22px;
+    border-radius: 3px;
+    padding: 0 6px;
+    font-size: 11px;
+  }
+
+  &--sm {
+    height: 28px;
+    border-radius: 4px;
+    padding: 0 8px;
+    font-size: 13px;
+  }
+
+  &--md {
+    height: 36px;
+    border-radius: 6px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  &--lg {
+    height: 48px;
+    border-radius: 6px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  &--xl {
+    height: 56px;
+    border-radius: 6px;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+}
+
+// ============================================================
+// PROP : isFull (전체 너비 여부)
+// ============================================================
+.#{$module} {
+  &--full {
+    width: 100%;
+  }
+}
+
+// ============================================================
+// PROP : Icon (아이콘)
+// ============================================================
+
+.#{$module} {
+  &__icon--left {
+    margin-right: 10px;
+    &::before {
+      vertical-align: middle;
+    }
+  }
+
+  &__icon--right {
+    margin-left: 10px;
+    &::before {
+      vertical-align: middle;
+    }
+  }
+}
